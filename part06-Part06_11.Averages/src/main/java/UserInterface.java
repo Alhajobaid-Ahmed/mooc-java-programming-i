@@ -37,6 +37,10 @@ public class UserInterface {
     }
 
     public void printGradeDistribution() {
+        
+        System.out.println("The average of points: " + register.averageOfPoints());
+        System.out.println("The average of grades: " + register.averageOfGrades());
+        System.out.println("Grade distribution:");
         int grade = 5;
         while (grade >= 0) {
             int stars = register.numberOfGrades(grade);
@@ -46,6 +50,7 @@ public class UserInterface {
 
             grade = grade - 1;
         }
+        
         
     }
 

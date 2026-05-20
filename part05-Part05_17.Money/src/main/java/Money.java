@@ -23,13 +23,53 @@ public class Money {
         return this.cents;
     }
 
-    public String toString() {
-        String zero = "";
-        if (this.cents < 10) {
-            zero = "0";
+    public Money plus(Money addition) {
+        int totalE = this.euros + addition.euros();
+        int tCents = this.cents + addition.cents();
+
+        if (tCents >= 100) {
+            totalE++;
+            tCents -= 100;
         }
 
-        return this.euros + "." + zero + this.cents + "e";
+        return new Money(totalE, tCents);
+    }
+
+    public boolean lessThan(Money compared) {
+        if (this.euros < compared.euros()) {
+            return true;
+        }
+
+        if (this.euros == compared.euros() && this.cents < compared.cents()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public Money minus(Money decreaser) {
+        int totalE = this.euros - decreaser.euros();
+        int tCents = this.cents - decreaser.cents();
+
+        if (tCents < 0) {
+            totalE--;
+            tCents += 100;
+        }
+
+        if (totalE < 0) {
+            return new Money(0, 0);
+        }
+
+        return new Money(totalE, tCents);
+    }
+
+    public String toString() {
+        String z = "";
+        if (this.cents < 10) {
+            z = "0";
+        }
+
+        return this.euros + "." + z + this.cents + "e";
     }
 
 }
